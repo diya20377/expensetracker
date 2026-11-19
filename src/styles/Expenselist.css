@@ -1,0 +1,163 @@
+.Expenselist {
+    width: 75%;
+    margin: 40px auto;
+    background-color: rgb(253, 251, 253);
+    color: black;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rosybrown;
+}
+
+/* header +search */
+.list-search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.list-search h1 {
+    color: black;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.list-help {
+    margin-top: 6px;
+    color: rgb(249, 246, 249);
+    font-size: 14px;
+}
+
+/* search & filter */
+.list-search select,
+.list-search input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid rgb(153, 70, 236);
+    outline: none;
+    margin-left: 10px;
+    font-size: 14px;
+    background-color: antiquewhite;
+    color: black;
+}
+
+.list-search select:focus,
+.list-search input:focus {
+    border-color: rgb(184, 133, 231);
+    box-shadow: 0 0 0 2px rgb(24, 44, 105);
+}
+
+/* Table */
+.Expenselist table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table header */
+.Expenselist th {
+    background-color: rgb(111, 68, 240);
+    color: aliceblue;
+    padding: 12px;
+    text-align: left;
+    font-weight: 500;
+}
+
+/* Table Rows */
+.Expenselist td {
+    padding: 12px;
+    border-bottom: 1px solid rgb(224, 201, 247);
+    color: rgb(19, 18, 18);
+    background-color: aliceblue;
+}
+
+/* Table Hover Effect */
+.Expenselist tbody tr:hover td {
+    background-color: aliceblue;
+}
+
+/* Action Button */
+.table-action {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Edit Button */
+.btn-edit {
+    background-color: #FEB05D;
+    color: rgb(22, 22, 22);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-edit:hover {
+    background-color: #FEB05D;
+    transform: translateY(-2px);
+}
+
+/* Delete Button */
+.btn-delete {
+    background-color: #e74c3c;
+    color: rgb(22, 22, 22);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-delete:hover {
+    background-color: #e74c3c;
+    transform: translateY(-2px);
+}
+
+/* View Button */
+.btn-readmore {
+    background: linear-gradient(135deg, #587bd3,#1940b4);
+    color: aliceblue;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn-readmore:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(90, 122, 205, 0.4);
+}
+
+/* Total Amount */
+.expense-total td {
+    font-weight: 600;
+    text-align: right;
+    background-color: aliceblue;
+    color: black;
+}
+
+/* Empty State */
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: beige;
+}
+
+/* Loding and error message */
+.item-message {
+    padding: 12px;
+    text-align: center;
+    color: #7B9BFF;
+}
+
+.items-error {
+    color: rgb(241, 9, 47);
+}
