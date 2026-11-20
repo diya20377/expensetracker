@@ -1,7 +1,26 @@
+import { useEffect, useState } from 'react';
 import '../styles/Expenselist.css';
+import ConfirmationModel from './ConfirmationModel';
 
-function Expenselist({expenses}) {
+function Expenselist() {
+    const [expenses, setExpenses] = useState([]);
+    const loadExpenses = () => {
+    const savedExpenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+    setExpenses(savedExpenses);
+    };
+
+    useEffect(() => {
+    //safe: we only read localstorage amount
+    //eslint-disable-next-line react-hooks/set-state-in-effect
+    loadExpenses(); 
+    },[]);
+    const totalAmount = expenses.reduce(
+    (sum, item) => sum + Number(item.amount),
+    0
+    );
+
 return (
+    <>
     <div className="Expenselist">
         <div className="list-search">
             <div>
@@ -39,10 +58,10 @@ return (
         </thead>
         
         <tbody>
-            {expenses.map((expenses)=>(
-                <tr>
+            {expenses.length>0?(expenses.map((expenses)=>(
+                <tr key={expenses.id}>
                     <td>{expenses.amount}</td>
-                    <td>{expenses.shopping}</td>
+                    <td>{expenses.description}</td>
                     <td>{expenses.date}</td>
                     <td>{expenses.category}</td>
                     <td className="tble=action">
@@ -51,16 +70,28 @@ return (
                         <button className="btn-readmore">View</button>
                     </td>
                 </tr>
-            ))}
+            ))):(<>
+            <tr>
+                <td colSpan="7" className="no-data"> No Expenses Found </td>
+            </tr>
+            </>)
+            }
             
-
             <tr className="expense-total">
-                <td colSpan={5}>total: ₹2,000</td>
+                <td colSpan="7">total Amount: {totalAmount}</td>
             </tr>
         </tbody>
     </table>
     </div>
-
+    <ConfirmationModel
+    title="Delete Expense"
+    message={"Are you sure you want to delete this expense"}
+    confirmText="Delete"
+    cancelText="Cancel"
+    onCancel={() => {}}
+    onConfirm={() => {}}
+    />
+</>
 );
 }
 
