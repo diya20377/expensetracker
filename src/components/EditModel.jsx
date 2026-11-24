@@ -1,55 +1,106 @@
+import { useEffect, useState } from 'react'
 import '../styles/EditModel.css'
 
-function EditModel() {
-  return (
-    <div className="model">
-        <div className="form-box">
-            <form>
-                <h1>Edit Expense</h1>
+function EditModel({ editId, onClose, onUpdate }) {
+    const [formData, setFormData] = useState({
+        id: editId,
+        amount: null,
+        description: "",
+        date: "",
+        category: "",
+    });
 
-                <input
-                type="number"
-                name="amount"
-                defaultValue=""
-                placeholder="Amount"
-                />
+    useEffect(() => {
+        const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+        const expense = expenses.find((item) => String(item.id) === String(editId));
 
-                <input
-                type="text"
-                name="description"
-                defaultValue=""
-                placeholder="description"
-                />
+        //eslint-disable-next-line react-hooks/set-state-in-effect
+        if (expense) setFormData(expense);
+    }, [editId]);
 
-                <input
-                type="date"
-                name="date"
-                defaultValue=""
-                />
-                
-                <label htmlFor="category">Category:</label>
-                <select id="category" name="category" defaultValue="">
-                <option value="">select category</option>
-                <option value="food">Food</option>
-                <option value="shopping">Shopping</option>
-                <option value="transportation">Transportation</option>
-                <option value="education">Education</option>
-                <option value="phoneBill">Phone Bill</option>
-                <option value="entertainment">Entertainment</option>
-                </select>
+    //handle change
+    const handlechange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({
+            ...prev,
+            [name]: name === "amount" ? Number(value) : value,
+        }));
+    };
 
-                <div className="model-btn">
-                    <button className="edit">
-                    update
-                    </button>
-                    <button className="cancel">
-                    cancel
-                    </button>
-                </div>
-            </form>
-        </div>      
-    </div>
-  )
+    //update expense
+    const handleUpdate = (e) => {
+        e.preventDefault();
+
+        const expenses = JSON.parse(localStorage.getItem("expenses") || "[]");
+        const updatedExpenses = expenses.map((item) =>
+            String(item.id) === String(editId) ? formData : item
+        );
+
+        localStorage.setItem("expenses", JSON.stringify(updatedExpenses));
+        onUpdate();
+        onClose();
+    };
+
+    return (
+        <div className="model">
+            <div className="form-box">
+                <form onSubmit={handleUpdate}>
+                    <h1>Edit Expense</h1>
+
+                    <input
+                        type="number"
+                        name="amount"
+                        value={formData.amount || ''}
+                        onChange={handlechange}
+                        defaultValue=""
+                        placeholder="Amount"
+                    />
+
+                    <input
+                        type="text"
+                        name="description"
+                        value={formData.description}
+                        onChange={handlechange}
+                        defaultValue=""
+                        placeholder="description"
+                    />
+
+                    <input
+                        type="date"
+                        name="date"
+                        value={formData.date}
+                        onChange={handlechange}
+                        defaultValue=""
+                    />
+
+                    <label htmlFor="category">category:</label>
+                    <select
+                        name="category"
+                        value={formData.category}
+                        onChange={handlechange}
+                    >
+
+                    <option value="">Select category</option>
+                    <option value="Food">Food</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Education">Education</option>
+                    <option value="Phonebill">Phonebill</option>
+                    <option value="Entertainment">Entertainment</option>
+                    </select>
+
+                    <div className="model-btn">
+                        <button className="edit">
+                            update
+                        </button>
+                        <button className="cancel">
+                            cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
 }
 
 export default EditModel

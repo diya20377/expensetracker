@@ -48,7 +48,7 @@ export default function Expenseform() {
         e.preventDefault();
         if(!validate()) return;
 
-        const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
+        const expenses = JSON.parse(localStorage.getItem("expenses") || '[]');
         const newExpense = {...formData, id: uuidv4() };
 
         console.log("Expense added successfully", newExpense);
@@ -93,6 +93,7 @@ export default function Expenseform() {
                 <select id="category" name="category" 
                     value={formData.category}
                     onChange={handlechange}>
+
                     <option value="">Select category</option>
                     <option value="Food">Food</option>
                     <option value="Shopping">Shopping</option>
