@@ -15,7 +15,7 @@
 
 /* App title */
 .nav-container h1{
-    color: aliceblue;
+    color: #ffffff;
     font-size: 26px;
     font-weight: 600;
     margin: 0;
@@ -37,7 +37,7 @@
 .links{
     display: inline-block;
     text-decoration: none;
-    color: rgb(241, 242, 243);
+    color: #ffffff;
     font-size: 18px;
     font-weight: 500;
     padding: 8px 12px;
@@ -47,6 +47,12 @@
 
 /* Hover effect */
 .links:hover{
+    background-color: #FEB05D;
+    color: #2B2A2A;
+}
+
+/*active route*/
+.links.active {
     background-color: #FEB05D;
     color: #2B2A2A;
 }
@@ -64,7 +70,7 @@
     height: 36px;
     border: none;
     background: transparent;
-    color: rgb(243, 247, 247);
+    color: #ffffff;
     cursor: pointer;
     font-size: 20px;
     display: flex;
@@ -74,18 +80,18 @@
 }
 
 .theme-toggle:hover{
-    color: rgb(79, 4, 30);
+    color: #FEB05D;
     transform: scale(1.1);
 }
 
 /* Logout button */
 .logout-btn{
     background-color: #FEB05D;
-    color: black;
+    color: #2B2A2A;
     font-weight: 600;
 }
 
 .logout-btn:hover{
-    background-color: azure;
-    color: blueviolet;
+    background-color: #ffffff;
+    color: #2B2A2A;
 }

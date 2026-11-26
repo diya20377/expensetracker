@@ -3,13 +3,21 @@ import "./App.css";
 import Homepage from "./pages/Homepage";
 import AddExpensepage from "./pages/AddExpensepage";
 import ExpenseDetails from "./components/ExpenseDetails";
+import Layout from "./Layout/Layout";
+import LoginPage from "./pages/LoginPage";
+import PrivateRoutes from "./auth/PrivateRoutes";
+import ExpenseItemPage from "./pages/ExpenseItemPage";
 
 function App(){
 const route=createBrowserRouter([
-    {path:'/',element:<Homepage/>},
+    {path:"/",element:(<PrivateRoutes><Layout/></PrivateRoutes>),
+    children:[ {path:'/',element:<Homepage/>},
     {path:'/add-expense',element:<AddExpensepage/>},
-    {path:'/expenseDetails/:id',element:<ExpenseDetails/>}
-])
+    {path:'/expense-items',element:<ExpenseItemPage/>},
+    {path:'/expenseDetails/:id',element:<ExpenseDetails/>}],
+},
+{path:"/login", element: <LoginPage/>},
+]);
  return (
   <>
   

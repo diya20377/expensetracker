@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Expenselist() {
     const [expenses, setExpenses] = useState([]);
+    const [filter,setFilter] = useState('all');
+    const [searchTerm, setSearchTerm] = useState('');
     const [deleteExpense, setDeleteExpense] = useState(null);
     const [openModel, setOpenModel] = useState(false);
     const [editId, setEditId] = useState(null);
@@ -26,6 +28,22 @@ function Expenselist() {
     (sum, item) => sum + Number(item.amount),
     0
     );
+
+    // filtered expense
+    const filteredExpenses = expenses.filter((item) => {
+        const matchesCategory = filter === 'all' || item.category === filter;
+        const matchesSearch = item.description.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
+
+    // handler
+    const handleFilterChange = (e) => {
+        setFilter(e.target.value);
+    };
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
+    };
 
     const handleDelete =(id) => {
         const updatedExpenses = expenses.filter(
@@ -62,17 +80,21 @@ return (
             </div>
 
             <div>
-                <select>
-                    <option>All categories</option>
-                    <option>Food</option>
-                    <option>Travel</option>
-                    <option>Shopping</option>
-                    <option>Entertainment</option>
+                <select value={filter} onChange={handleFilterChange}>
+                    <option value= "all">All categories</option>
+                    <option value="Food">Food</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Transportation">Transportation</option>
+                    <option value="Education">Education</option>
+                    <option value="Phonebill">Phonebill</option>
+                    <option value="Entertainment">Entertainment</option>
                 </select>
 
                 <input 
                 type="search"
                 placeholder="search expense..."
+                value={searchTerm}
+                onChange={handleSearchChange}
                 />
             </div>
     </div>
@@ -89,7 +111,7 @@ return (
         </thead>
         
         <tbody>
-            {expenses.length>0?(expenses.map((expenses)=>(
+            {filteredExpenses.length>0?(filteredExpenses.map((expenses)=>(
                 <tr key={expenses.id}>
                     <td>{expenses.amount}</td>
                     <td>{expenses.description}</td>

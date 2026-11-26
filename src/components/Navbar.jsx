@@ -1,8 +1,15 @@
 import { BsMoonStarsFill } from "react-icons/bs";
 import "../styles/Navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+
+  const navigate = useNavigate();
+  const logout = () => {
+    localStorage.removeItem('user');
+    navigate('/login');
+  }
+
   return (
     <div className="main-container">
       <div className="nav-container">
@@ -21,7 +28,7 @@ export default function Navbar() {
           </ul>
 
           <ul>
-            <li><a href="" className="links">Expense items</a></li>
+            <li><NavLink to="/expense-items" className="links">Expense items</NavLink></li>
           </ul>
         </div>
 
@@ -30,7 +37,7 @@ export default function Navbar() {
             <BsMoonStarsFill />
           </button>
 
-          <a href="" className="links logout-btn">
+          <a href="" className="links logout-btn" to="" onClick={logout}>
             logout
           </a>
         </div>
