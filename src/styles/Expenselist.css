@@ -8,6 +8,25 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
+.Expenselist.dark {
+    background-color: #374151;
+    color: #ffffff;
+}
+
+.Expenselist.dark.list-search h1, 
+.Expenselist.dark td {
+    color: #ffffff;
+}
+
+.Expenselist.dark td {
+    background-color: #374151;
+    border-bottom-color: #4b5663;
+}
+
+.Expenselist.dark tr:hover td {
+    background-color: #4b5563;
+}
+
 /* header +search */
 .list-search {
     display: flex;

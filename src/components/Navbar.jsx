@@ -1,9 +1,11 @@
 import { BsMoonStarsFill } from "react-icons/bs";
 import "../styles/Navbar.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
+import { FaSun } from "react-icons/fa";
 
 export default function Navbar() {
-
+  const {theme, toggleTheme} = useTheme();
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem('user');
@@ -33,8 +35,10 @@ export default function Navbar() {
         </div>
 
         <div className="nav-action">
-          <button type="button" className="theme-toggle">
-            <BsMoonStarsFill />
+          <button type="button" className="theme-toggle"
+          onClick={toggleTheme}
+          >
+            {theme === 'light' ? <BsMoonStarsFill/> : <FaSun/>}
           </button>
 
           <a href="" className="links logout-btn" to="" onClick={logout}>
